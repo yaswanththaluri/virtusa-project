@@ -19,7 +19,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DataAdapter extends ArrayAdapter<Item>
@@ -86,6 +85,8 @@ public class DataAdapter extends ArrayAdapter<Item>
 
 
 
+
+
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
@@ -112,6 +113,15 @@ public class DataAdapter extends ArrayAdapter<Item>
                 }
                 else
                 {
+                    TextView read = vview.findViewById(R.id.readmore);
+                    LinearLayout lay = vview.findViewById(R.id.colorlay);
+                    TextView lock = vview.findViewById(R.id.locking);
+
+                    read.setVisibility(View.INVISIBLE);
+                    lock.setTextColor(Color.parseColor("#ff0000"));
+                    lock.setVisibility(View.VISIBLE);
+                    lock.setText("Locked");
+                    lay.setBackgroundColor(Color.parseColor("#ff0000"));
 
                 }
             }

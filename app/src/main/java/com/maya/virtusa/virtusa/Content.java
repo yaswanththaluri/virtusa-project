@@ -114,7 +114,6 @@ public class Content extends Fragment {
         adapter.clear();
     }
 
-
     private void detachDatabaseReadListener() {
         if (mChildEventListener != null) {
             reference.removeEventListener(mChildEventListener);

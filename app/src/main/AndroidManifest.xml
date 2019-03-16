@@ -23,7 +23,8 @@
         <activity
             android:name=".Dashboard"
             android:label="DashBoard" />
-        <activity android:name=".ItemView" />
+        <activity android:name=".ItemView"
+            android:label="News Content"/>
         <activity
             android:name=".Authentication"
             android:theme="@style/Fullscreen"/>
