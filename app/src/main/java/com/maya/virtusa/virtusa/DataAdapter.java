@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,13 +19,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataAdapter extends ArrayAdapter<Item>
 {
 
-    private String isPremium = "false";
-
+    private View vview;
 
 
 
@@ -39,11 +40,14 @@ public class DataAdapter extends ArrayAdapter<Item>
 
         }
 
+        vview = convertView;
 
         TextView title = convertView.findViewById(R.id.displaycontentname);
         TextView author = convertView.findViewById(R.id.displayauthorname);
         TextView preview = convertView.findViewById(R.id.displaypreview);
         TextView read = convertView.findViewById(R.id.readmore);
+
+        LinearLayout lay = convertView.findViewById(R.id.colorlay);
 
 
 
@@ -61,30 +65,64 @@ public class DataAdapter extends ArrayAdapter<Item>
         final String tot = item.getFullContent();
 
 
-
-        if (item.getIsFree().equals("false") || checkPremium())
+        if(item.getIsFree().equals("true"))
         {
             read.setVisibility(View.VISIBLE);
             lock.setTextColor(Color.parseColor("#33cc33"));
             lock.setText("Unlocked");
             lock.setVisibility(View.VISIBLE);
+            lay.setBackgroundColor(Color.parseColor("#33cc33"));
         }
 
-        else if (item.getIsFree().equals("false"))
+        else
         {
             read.setVisibility(View.INVISIBLE);
             lock.setTextColor(Color.parseColor("#ff0000"));
             lock.setVisibility(View.VISIBLE);
             lock.setText("Locked");
+            lay.setBackgroundColor(Color.parseColor("#ff0000"));
         }
 
-        else
-        {
-            read.setVisibility(View.VISIBLE);
-            lock.setTextColor(Color.parseColor("#33cc33"));
-            lock.setText("Unlocked");
-            lock.setVisibility(View.VISIBLE);
-        }
+
+
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        DatabaseReference reference = database.getReference().child("users").child(user.getUid());
+
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userEntry u = dataSnapshot.getValue(userEntry.class);
+                if(u.getIsPremium().equals("true"))
+                {
+
+                    TextView read = vview.findViewById(R.id.readmore);
+                    LinearLayout lay = vview.findViewById(R.id.colorlay);
+                    TextView lock = vview.findViewById(R.id.locking);
+
+
+                    read.setVisibility(View.VISIBLE);
+                    lock.setTextColor(Color.parseColor("#33cc33"));
+                    lock.setText("Unlocked");
+                    lock.setVisibility(View.VISIBLE);
+                    lay.setBackgroundColor(Color.parseColor("#33cc33"));
+                }
+                else
+                {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
 
         read.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,42 +146,7 @@ public class DataAdapter extends ArrayAdapter<Item>
     }
 
 
-    public boolean checkPremium()
-    {
 
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser user = auth.getCurrentUser();
-        DatabaseReference reference = database.getReference().child("users").child(user.getUid());
-
-
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userEntry u = dataSnapshot.getValue(userEntry.class);
-                if(u.getIsPremium().equals("true"))
-                {
-                    isPremium = "true";
-                }
-                else
-                {
-                    isPremium = "false";
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        if (isPremium.equals("true"))
-            return true;
-        else
-            return false;
-
-    }
 
 
 }

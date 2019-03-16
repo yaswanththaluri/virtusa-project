@@ -75,6 +75,8 @@ public class Content extends Fragment {
                 @Override
                 public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
+
+
                 }
 
                 @Override
@@ -119,4 +121,6 @@ public class Content extends Fragment {
             mChildEventListener = null;
         }
     }
+
+
 }
