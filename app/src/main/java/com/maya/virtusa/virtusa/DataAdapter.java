@@ -132,6 +132,8 @@ public class DataAdapter extends ArrayAdapter<Item>
             }
         });
 
+        final String src = item.getSrc();
+
 
 
         read.setOnClickListener(new View.OnClickListener() {
@@ -142,6 +144,7 @@ public class DataAdapter extends ArrayAdapter<Item>
                 extras.putString("contentname", na);
                 extras.putString("contentauthor", au);
                 extras.putString("contentpreview", tot);
+                extras.putString("src", src);
                 i.putExtras(extras);
                 view.getContext().startActivity(i);
             }

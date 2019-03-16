@@ -7,18 +7,20 @@ public class Item {
     private String preview;
     private String isFree;
     private String fullContent;
+    private String src;
 
     public Item()
     {
 
     }
 
-    public Item(String contentName, String author, String preview, String isFree, String fullContent) {
+    public Item(String contentName, String author, String preview, String isFree, String fullContent, String src) {
         this.contentName = contentName;
         this.author = author;
         this.preview = preview;
         this.isFree = isFree;
         this.fullContent = fullContent;
+        this.src = src;
     }
 
     public String getContentName() {
@@ -59,5 +61,13 @@ public class Item {
 
     public void setFullContent(String fullContent) {
         this.fullContent = fullContent;
+    }
+
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
     }
 }
