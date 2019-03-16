@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "515361892521",
+    "firebase_url": "https://virtusahire.firebaseio.com",
+    "project_id": "virtusahire",
+    "storage_bucket": "virtusahire.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:515361892521:android:ad8b2bb785bc6587",
+        "android_client_info": {
+          "package_name": "com.maya.virtusa.virtusa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "515361892521-s2ef0aoocek1v09nsu3kc321u35dtch6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maya.virtusa.virtusa",
+            "certificate_hash": "cfb55f5ca97a9cae0604871e38d2029e74c1d7fd"
+          }
+        },
+        {
+          "client_id": "515361892521-fdsg2plkl4cukkd605c87rphh8cht5fp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3jLv5EMtp53VQg71RU21gy7Y_hgrRI6k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "515361892521-fdsg2plkl4cukkd605c87rphh8cht5fp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
