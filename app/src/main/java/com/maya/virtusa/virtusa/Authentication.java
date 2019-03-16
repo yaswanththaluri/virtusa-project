@@ -2,6 +2,7 @@ package com.maya.virtusa.virtusa;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class Authentication extends AppCompatActivity {
     private ProgressDialog dialogsignup;
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    boolean doubleBackToExitPressedOnce = false;
 
 
 
@@ -240,5 +242,27 @@ public class Authentication extends AppCompatActivity {
         FirebaseUser user = auth.getCurrentUser();
 
         reference.child(user.getUid()).setValue(userDet);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+
+        if (doubleBackToExitPressedOnce) {
+            finishAffinity();
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+
     }
 }
